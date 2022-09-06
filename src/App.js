@@ -21,10 +21,16 @@ function App() {
         </div>
       </header>
       <div className="content">
-        <h1>All sneakers</h1>
+        <div className="contentTop">
+          <h1>All sneakers</h1>
+          <div className="search-block">
+            <img width={18} height={18} src="/img/search.svg" alt="Search" />
+            <input placeholder="Search..." />
+          </div>
+        </div>
         <div className="cards">
           <div className="card">
-            <img width={133} height={112} src="/img/sneakers/vans.jpg" alt="Vans"/>
+            <img width={133} height={112} src="/img/sneakers/vans.png" alt="Vans"/>
             <p>Vans slip on shoes</p>
             <div className="cardInfo">
               <div className="cardPrice">
@@ -32,7 +38,7 @@ function App() {
                 <b>4 999 uah.</b>
               </div>
               <button>
-                <img width={28} height={28} src="/img/plus.svg" alt="Plus"/>
+                <img width={22} height={22} src="/img/plus.svg" alt="Plus"/>
               </button>
             </div>
           </div>

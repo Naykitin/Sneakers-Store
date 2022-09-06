@@ -65,24 +65,45 @@ header {
     margin: 0;
   }
 
+  .contentTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .search-block {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      border: 1px solid silver;
+      border-radius: .3rem;
+      padding-left: .3rem;
+      overflow: hidden;
+
+      input {
+        border: none;
+        height: 2rem;
+        outline: none;
+      }
+    }
+  }
+
   .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: start;
     gap: 2rem;
     margin-top: 2rem;
 
     .card {
       display: flex;
+      align-items: center;
       flex-direction: column;
       width: 10rem;
-      padding: .5rem;
+      padding: 1rem;
       border: 1px solid rgb(229, 229, 229);
       border-radius: .5rem;
 
       img {
-        object-fit: cover;
+        object-fit: contain;
       }
 
       .cardInfo {
