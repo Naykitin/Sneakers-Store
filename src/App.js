@@ -1,63 +1,33 @@
+import Card from './components/Card';
+import Header from './components/Header';
+import Cart from './components/Cart';
+
+const sneakers = [
+  {
+    id: 1,
+    image: '/img/sneakers/vans.png',
+    title: 'Vans slip on shoes 39',
+    price: 1999
+  },
+  {
+    id: 2,
+    image: '/img/sneakers/vans.png',
+    title: 'Vans slip on shoes 42',
+    price: 2099
+  },
+  {
+    id: 3,
+    image: '/img/sneakers/vans.png',
+    title: 'Vans slip on shoes 44',
+    price: 2199
+  }
+]
 
 function App() {
   return (
     <div className="wrapper">
-
-      <div style={{display: 'none'}} className="shopCartOverlay">
-        <div className="shopCart">
-          <h3>
-            Shop Cart
-            <img width="32" height="32" class="remove" src="/img/plus.svg" alt="Plus" />
-          </h3>
-
-          <div className="cartItems">
-            <div className="cartItem">
-              <img width={120} height={70} src="/img/sneakers/vans.png" alt="Vans" />
-              <div className="cartItem-info">
-                <p>Vans slip on shoes</p>
-                <b>4 999 uah.</b>
-              </div>
-              <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus"/>
-            </div>
-          </div>
-
-          <div className="shopCartTotal">
-            <div className="totalPrices">
-              <div>
-                <p>Total</p>
-                <hr/>
-                <b>12499 uah.</b>
-              </div>
-              <div>
-                <p>Tax 5%</p>
-                <hr/>
-                <b>1299 uah.</b>
-              </div>
-            </div>
-            <button>Сheckout</button>
-          </div>
-        </div>
-      </div>
-      
-
-      <header>
-        <div className="headerLeft">
-          <img width={40} height={40} src="/img/logo.png" alt="logo" />
-          <div className="headerInfo">
-            <h3>Sneakers-shop</h3>
-            <p>Best sneakers store</p>
-          </div>
-        </div>
-        <div className="headerRight">
-          <div>
-            <img width={18} height={18} src="/img/cart.svg" alt="cart"/>
-            <span>1205 uah.</span>
-          </div>
-          <div>
-            <img width={18} height={18} src="/img/user.png" alt="user"/>
-          </div>
-        </div>
-      </header>
+      <Cart />
+      <Header />
       <div className="content">
         <div className="contentTop">
           <h1>All sneakers</h1>
@@ -67,18 +37,11 @@ function App() {
           </div>
         </div>
         <div className="cards">
-          <div className="card">
-            <img width={18} height={18} className="favorite" src="/img/unliked.png" alt="unliked"/>
-            <img width={133} height={112} src="/img/sneakers/vans.png" alt="Vans"/>
-            <p>Vans slip on shoes</p>
-            <div className="cardInfo">
-              <div className="cardPrice">
-                <span>Price:</span>
-                <b>4 999 uah.</b>
-              </div>
-              <img width={22} height={22} src="/img/plus.svg" alt="Plus"/>
-            </div>
-          </div>
+          {
+            sneakers.map((sneaker) => (
+              <Card id={sneaker.id} image={sneaker.image} title={sneaker.title} price={sneaker.price} />
+            ))
+          }
         </div>
       </div>
     </div>

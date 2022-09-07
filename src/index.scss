@@ -12,7 +12,7 @@ body {
   box-shadow: 0 .8rem 1.2rem rgba(0, 0, 0, 0.04);
   border-radius: 1.2rem;
   max-width: 67.5rem;
-  margin: 3rem auto 0;
+  margin: 3rem auto;
 }
 
 header {
@@ -86,53 +86,11 @@ header {
       }
     }
   }
-
   .cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1rem;
     margin-top: 2rem;
-
-    .card {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      width: 10rem;
-      padding: 1rem;
-      border: 1px solid rgb(229, 229, 229);
-      border-radius: .8rem;
-      transition: .2s all;
-
-      &:hover {
-        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.05);
-        transform: translateY(-1%);
-      }
-
-      .favorite {
-        align-self: start;
-        cursor: pointer;
-      }
-
-      img {
-        object-fit: contain;
-      }
-
-      .cardInfo {
-        display: flex;
-        column-gap: 1rem;
-        align-items: center;
-
-        .cardPrice {
-          display: flex;
-          flex-direction: column;
-
-          span {
-            font-weight: bold;
-            color: #616161;
-          }
-        }
-      }
-    }
   }
 }
 
