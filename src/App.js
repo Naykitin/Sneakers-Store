@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from './components/Card';
 import Header from './components/Header';
 import Cart from './components/Cart';
@@ -24,6 +25,8 @@ const sneakers = [
 ]
 
 function App() {
+  const [] = React.useState();
+
   return (
     <div className="wrapper">
       <Cart />
