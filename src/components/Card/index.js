@@ -1,9 +1,12 @@
+import React from 'react';
 import styles from './Card.module.scss';
 
 function Card(props) {
 
-   const onClickButton = (id) => {
-      alert(`ID: ${id}`)
+   const [isAdded, setIsAdded] = React.useState(false);
+
+   const onClickAdd = () => {
+      setIsAdded(!isAdded);
    }
 
   return (
@@ -16,7 +19,7 @@ function Card(props) {
          <span>Price:</span>
          <b>{props.price} uah.</b>
       </div>
-      <img width={22} height={22} src="/img/plus.svg" alt="Plus" onClick={() => onClickButton(props.id)} />
+      <img width={22} height={22} src={isAdded ? "/img/accept.png" : "/img/plus.svg" } alt="Plus" onClick={onClickAdd} />
       </div>
    </div>
   )

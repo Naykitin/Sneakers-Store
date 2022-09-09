@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Cart() {
+function Cart(props) {
   return (
-   <div style={{display: 'none'}} className="shopCartOverlay">
+   <div className="shopCartOverlay">
       <div className="shopCart">
       <h3>
          Shop Cart
-         <img width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
+         <img  onClick={props.onCloseCart} width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
       </h3>
 
       <div className="cartItems">
