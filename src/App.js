@@ -3,8 +3,6 @@ import Card from './components/Card';
 import Header from './components/Header';
 import Cart from './components/Cart';
 
-const sneakers = []
-
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
@@ -19,8 +17,14 @@ function App() {
   }, []);
 
   const onAddToCart = (currItem) => {
-    console.log(currItem);
-    setCartItems((prev) => [...prev, currItem])
+    // console.log(cartItems);
+    // console.log(currItem);
+    // console.log(cartItems.includes(currItem));
+    if (cartItems.filter((i) => i.includes(currItem))) {
+      return;
+    } else {
+      setCartItems((prev) => [...prev, currItem])
+    }
   }
 
 
