@@ -1,23 +1,27 @@
 import React from 'react'
 
-function Cart(props) {
+function Cart({onCloseCart, cartItems = []}) {
   return (
    <div className="shopCartOverlay">
       <div className="shopCart">
       <h3>
          Shop Cart
-         <img  onClick={props.onCloseCart} width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
+         <img  onClick={onCloseCart} width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
       </h3>
 
       <div className="cartItems">
-         <div className="cartItem">
-            <img width={120} height={70} src="/img/sneakers/vans.png" alt="Vans" />
-            <div className="cartItem-info">
-            <p>Vans slip on shoes</p>
-            <b>4 999 uah.</b>
-            </div>
-            <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus"/>
-         </div>
+         {
+            cartItems.map((obj) => (
+               <div className="cartItem">
+                  <img width={120} height={70} src={obj.image} alt={obj.title} />
+                  <div className="cartItem-info">
+                  <p>{obj.title}</p>
+                  <b>{obj.price} uah.</b>
+                  </div>
+                  <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus"/>
+               </div>
+            ))
+         }
       </div>
 
       <div className="shopCartTotal">

@@ -7,6 +7,7 @@ const sneakers = []
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
@@ -17,10 +18,15 @@ function App() {
     })
   }, []);
 
+  const onAddToCart = (currItem) => {
+    console.log(currItem);
+    setCartItems((prev) => [...prev, currItem])
+  }
+
 
   return (
     <div className="wrapper">
-      {cartOpened && <Cart onCloseCart = {() => setCartOpened(false)} />}
+      {cartOpened && <Cart cartItems={cartItems} onCloseCart = {() => setCartOpened(false)} />}
       <Header onClickCart = {() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTop">
@@ -33,7 +39,7 @@ function App() {
         <div className="cards">
           {
             items.map((sneaker) => (
-              <Card id={sneaker.id} image={sneaker.image} title={sneaker.title} price={sneaker.price} />
+              <Card id={sneaker.id} image={sneaker.image} title={sneaker.title} price={sneaker.price} onPlus={(currItem) => onAddToCart(currItem)} />
             ))
           }
         </div>
