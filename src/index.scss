@@ -85,6 +85,10 @@ header {
         height: 2rem;
         outline: none;
       }
+
+      .clear {
+        transform: rotate(45deg);
+      }
     }
   }
   .cards {
