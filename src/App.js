@@ -14,11 +14,25 @@ function App() {
       return res.json();
     }).then(json => {
       setItems(json);
-    })
+    });
+    fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart').then(res => {
+      return res.json();
+    }).then(json => {
+      setCartItems(json);
+    });
   }, []);
 
   const onAddToCart = (currItem) => {
-    setCartItems((prev) => [...prev, currItem])
+    fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(currItem)
+    }).then(response => response.json()).then(setCartItems((prev) => [...prev, currItem]));
+  }
+
+  const onRemoveFromCart = (id) => {
+    fetch(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${id}`, { method: 'DELETE' }).then(setCartItems((prev) => prev.filter(item => item.id !== id)));
   }
 
   const onSearch = (event) => {
@@ -28,7 +42,7 @@ function App() {
 
   return (
     <div className="wrapper">
-      {cartOpened && <Cart cartItems={cartItems} onCloseCart = {() => setCartOpened(false)} />}
+      {cartOpened && <Cart cartItems={cartItems} onCloseCart = {() => setCartOpened(false)} onRemove={onRemoveFromCart} />}
       <Header onClickCart = {() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTop">

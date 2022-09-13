@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Cart({onCloseCart, cartItems = []}) {
+function Cart({onCloseCart, onRemove, cartItems = []}) {
   return (
    <div className="shopCartOverlay">
       <div className="shopCart">
@@ -11,14 +11,14 @@ function Cart({onCloseCart, cartItems = []}) {
 
       <div className="cartItems">
          {
-            cartItems.map((obj) => (
-               <div className="cartItem">
+            cartItems.map((obj, index) => (
+               <div key={index} className="cartItem">
                   <img width={120} height={70} src={obj.image} alt={obj.title} />
                   <div className="cartItem-info">
                   <p>{obj.title}</p>
                   <b>{obj.price} uah.</b>
                   </div>
-                  <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus"/>
+                  <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus" onClick={() => onRemove(obj.id)}/>
                </div>
             ))
          }
