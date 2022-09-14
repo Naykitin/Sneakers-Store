@@ -16,6 +16,9 @@ function Header(props) {
          <span>1205 uah.</span>
       </div>
       <div>
+         <img width={18} height={18} src="/img/unliked.png" alt="favorites"/>
+      </div>
+      <div>
          <img width={18} height={18} src="/img/user.png" alt="user"/>
       </div>
       </div>

@@ -6,6 +6,7 @@ import Cart from './components/Cart';
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
   const [search, setSearch] = React.useState('');
   const [cartOpened, setCartOpened] = React.useState(false);
 
@@ -28,21 +29,35 @@ function App() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currItem)
-    }).then(response => response.json()).then(setCartItems((prev) => [...prev, currItem]));
+    }).then(response => response.json());
+    setCartItems((prev) => [...prev, currItem]);
   }
 
   const onRemoveFromCart = (id) => {
     fetch(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${id}`, { method: 'DELETE' }).then(setCartItems((prev) => prev.filter(item => item.id !== id)));
   }
 
+  const onClickFavorite = (currItem) => {
+    fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(currItem)
+    }).then(response => response.json());
+    setFavorites((prev) => [...prev, currItem]);
+  }
+
   const onSearch = (event) => {
     setSearch(event.target.value);
   }
 
-
   return (
     <div className="wrapper">
-      {cartOpened && <Cart cartItems={cartItems} onCloseCart = {() => setCartOpened(false)} onRemove={onRemoveFromCart} />}
+      {cartOpened && <Cart 
+        cartItems={cartItems} 
+        onCloseCart = {() => setCartOpened(false)} 
+        onRemove={onRemoveFromCart} 
+      />}
       <Header onClickCart = {() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTop">
@@ -56,7 +71,14 @@ function App() {
         <div className="cards">
           {
             items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())).map((sneaker) => (
-              <Card key={sneaker.id} image={sneaker.image} title={sneaker.title} price={sneaker.price} onPlus={(currItem) => onAddToCart(currItem)} />
+              <Card 
+                key={sneaker.id} 
+                image={sneaker.image} 
+                title={sneaker.title} 
+                price={sneaker.price} 
+                onPlus={(currItem) => onAddToCart(currItem)} 
+                onFavorite={(currItem) => onClickFavorite(currItem)}
+              />
             ))
           }
         </div>
