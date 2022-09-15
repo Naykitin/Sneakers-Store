@@ -12,10 +12,7 @@ function Favorites({items, onAddToCart, onClickFavorite}) {
             items.map((sneaker) => (
               <Card 
                 key={sneaker.id} 
-                id={sneaker.id} 
-                image={sneaker.image} 
-                title={sneaker.title} 
-                price={sneaker.price} 
+                {...sneaker}
                 onPlus={(currItem) => onAddToCart(currItem)} 
                 onFavorite={onClickFavorite}
               />
