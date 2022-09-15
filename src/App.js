@@ -48,19 +48,20 @@ function App() {
  }
 
  const onClickFavorite = (currItem) => {
-  console.log(currItem);
-    // if (favorites.find(currItem => currItem.id === currItem.id)) {
-    //   fetch(`https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites/${currItem.id}`, { method: 'DELETE' });
-    //   setFavorites((prev) => prev.filter(item => item.id !== currItem.id))
-    // } else {
-    //   fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites',
-    //   {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(currItem)
-    //   }).then(response => response.json());
-    //   setFavorites((prev) => [...prev, currItem]);
-    // }
+  // console.log(currItem);
+  // console.log(favorites);
+    if (favorites.find(favCurrItem => favCurrItem.id === currItem.id)) {
+      fetch(`https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites/${currItem.id}`, { method: 'DELETE' });
+      setFavorites((prev) => prev.filter(item => item.id !== currItem.id))
+    } else {
+      fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currItem)
+      }).then(response => response.json());
+      setFavorites((prev) => [...prev, currItem]);
+    }
   }
 
   const onSearch = (event) => {

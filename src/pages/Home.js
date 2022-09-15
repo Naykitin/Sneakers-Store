@@ -17,9 +17,10 @@ function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart}
         </div>
         <div className="cards">
           {
-            items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())).map((sneaker) => (
+            items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())).map((sneaker, index) => (
               <Card 
-                key={sneaker.id} 
+                id={sneaker.id}
+                key={index}
                 image={sneaker.image} 
                 title={sneaker.title} 
                 price={sneaker.price} 
