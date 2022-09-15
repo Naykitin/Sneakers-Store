@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import axios from 'axios';
 
 function App() {
   
@@ -38,12 +39,7 @@ function App() {
   }
 
   const onAddToCart = (currItem) => {
-    fetch('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart',
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(currItem)
-    }).then(response => response.json());
+    axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart', currItem);
     setCartItems((prev) => [...prev, currItem]);
  }
 
@@ -86,7 +82,7 @@ function App() {
             onClickFavorite={onClickFavorite}
             onAddToCart={onAddToCart}
           />} />
-        <Route path="/favorites" element={<Favorites favorites={favorites}/>} />
+        <Route path="/favorites" element={<Favorites items={favorites} onClickFavorite={onClickFavorite}/>} />
       </Routes>
     </div>
   );

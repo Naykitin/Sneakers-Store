@@ -1,6 +1,6 @@
 import Card from '../components/Card';
 
-function Favorites({favorites, onAddToCart, onClickFavorite}) {
+function Favorites({items, onAddToCart, onClickFavorite}) {
 
    return (
       <div className="content">
@@ -9,7 +9,7 @@ function Favorites({favorites, onAddToCart, onClickFavorite}) {
         </div>
         <div className="cards">
           {
-            favorites.map((sneaker) => (
+            items.map((sneaker) => (
               <Card 
                 key={sneaker.id} 
                 id={sneaker.id} 
