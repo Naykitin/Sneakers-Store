@@ -4,7 +4,7 @@ import Card from '../components/Card';
 
 
 function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart}) {
-
+ 
    return (
       <div className="content">
         <div className="contentTop">

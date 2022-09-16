@@ -34,8 +34,17 @@ function App() {
   }
 
   const onAddToCart = (currItem) => {
-    axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart', currItem);
-    setCartItems((prev) => [...prev, currItem]);
+    try {
+      if(cartItems.find(cartCurrItem => Number(cartCurrItem.id) === Number(currItem.id))) {
+        axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${currItem.id}`);
+        setCartItems((prev) => prev.filter(item => Number(item.id) !== Number(currItem.id)));
+      } else {
+        axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart', currItem);
+        setCartItems((prev) => [...prev, currItem]);
+      }
+    } catch (error) {
+      
+    }
  }
 
  const onClickFavorite = async (currItem) => {

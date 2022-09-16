@@ -37,7 +37,7 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
                <b>1299 uah.</b>
                </div>
             </div>
-            <button>Сheckout</button>
+            <button>Checkout</button>
          </div>
       </div>
    </div>
