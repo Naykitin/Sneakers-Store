@@ -3,7 +3,22 @@ import Card from '../components/Card';
 
 
 
-function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart}) {
+function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart, cartItems, isLoading}) {
+
+  const rendeItems = () => {
+    const cardFilter = items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
+
+    return (isLoading ? [...Array(10)] : cardFilter).map((sneaker, index) => (
+      <Card 
+        key={index}
+        onPlus={(currItem) => onAddToCart(currItem)} 
+        onFavorite={(currItem) => onClickFavorite(currItem)}
+        added={cartItems.some(item => item.id === sneaker.id)}
+        loading={isLoading}
+        {...sneaker}
+      />
+    ))
+  }
  
    return (
       <div className="content">
@@ -17,14 +32,7 @@ function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart}
         </div>
         <div className="cards">
           {
-            items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase())).map((sneaker, index) => (
-              <Card 
-                key={index}
-                {...sneaker}
-                onPlus={(currItem) => onAddToCart(currItem)} 
-                onFavorite={(currItem) => onClickFavorite(currItem)}
-              />
-            ))
+            rendeItems()
           }
         </div>
       </div>
