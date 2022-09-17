@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import axios from 'axios';
 
+export const AppContext = React.createContext({});
+
 function App() {
   
   const [items, setItems] = React.useState([]);
@@ -70,28 +72,30 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
-      {cartOpened && <Cart 
-        cartItems={cartItems} 
-        onCloseCart = {() => setCartOpened(false)} 
-        onRemove={onRemoveFromCart} 
-      />}
+    <AppContext.Provider value={{ items, cartItems, favorites }}>
+      <div className="wrapper">
+        {cartOpened && <Cart 
+          cartItems={cartItems} 
+          onCloseCart = {() => setCartOpened(false)} 
+          onRemove={onRemoveFromCart} 
+        />}
 
-      <Header onClickCart = {() => setCartOpened(true)} />
-      <Routes>
-        <Route path="/" exact element={<Home 
-            items={items}
-            cartItems={cartItems}
-            search={search} 
-            setSearch={setSearch}
-            onSearch={onSearch}
-            onClickFavorite={onClickFavorite}
-            onAddToCart={onAddToCart}
-            isLoading={isLoading}
-          />} />
-        <Route path="/favorites" element={<Favorites items={favorites} onClickFavorite={onClickFavorite} onAddToCart={onAddToCart}/>} />
-      </Routes>
-    </div>
+        <Header onClickCart = {() => setCartOpened(true)} />
+        <Routes>
+          <Route path="/" exact element={<Home 
+              items={items}
+              cartItems={cartItems}
+              search={search} 
+              setSearch={setSearch}
+              onSearch={onSearch}
+              onClickFavorite={onClickFavorite}
+              onAddToCart={onAddToCart}
+              isLoading={isLoading}
+            />} />
+          <Route path="/favorites" element={<Favorites onClickFavorite={onClickFavorite} onAddToCart={onAddToCart}/>} />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   );
 }
 
