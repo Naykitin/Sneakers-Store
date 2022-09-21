@@ -18,7 +18,7 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
                      <p>{obj.title}</p>
                      <b>{obj.price} uah.</b>
                      </div>
-                     <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus" onClick={() => onRemove(obj.id)}/>
+                     <img width={32} height={32} className="remove" src="/img/plus.svg" alt="Plus" onClick={() => onRemove(obj.number, obj.id)}/>
                   </div>
                ))
             }

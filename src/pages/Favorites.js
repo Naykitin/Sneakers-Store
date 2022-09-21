@@ -13,12 +13,12 @@ function Favorites({onAddToCart, onClickFavorite}) {
         </div>
         <div className="cards">
           {
-            state.favorites.map((sneaker) => (
+            state.favorites.map((sneaker, index) => (
               <Card 
-                key={sneaker.id} 
+                key={index} 
                 {...sneaker}
                 onPlus={(currItem) => onAddToCart(currItem)} 
-                onFavorite={onClickFavorite}
+                onFavorite={(currItem) => onClickFavorite(currItem)}
               />
             ))
           }

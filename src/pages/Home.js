@@ -3,7 +3,7 @@ import Card from '../components/Card';
 
 
 
-function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart, cartItems, isLoading}) {
+function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart,  isLoading}) {
 
   const rendeItems = () => {
     const cardFilter = items.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()));
@@ -13,7 +13,6 @@ function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart,
         key={index}
         onPlus={(currItem) => onAddToCart(currItem)} 
         onFavorite={(currItem) => onClickFavorite(currItem)}
-        added={cartItems.some(item => item.id === sneaker.id)}
         loading={isLoading}
         {...sneaker}
       />
