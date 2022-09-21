@@ -1,4 +1,5 @@
 import React from 'react'
+import Notice from './Notice';
 
 function Cart({onCloseCart, onRemove, cartItems = []}) {
   return (
@@ -9,7 +10,9 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
             <img  onClick={onCloseCart} width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
          </h3>
 
-         <div className="cartItems">
+         {cartItems.length > 0 ? (
+            <>
+            <div className="cartItems">
             {
                cartItems.map((obj, index) => (
                   <div key={index} className="cartItem">
@@ -39,6 +42,14 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
             </div>
             <button>Checkout</button>
          </div>
+         </>) : (
+            <Notice 
+               title={'test1'} 
+               description={'test2'} 
+            />
+         )
+         }
+
       </div>
    </div>
   )
