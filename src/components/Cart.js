@@ -1,7 +1,22 @@
 import React from 'react'
 import Notice from './Notice';
+import axios from 'axios';
+import { AppContext } from '../App'
 
-function Cart({onCloseCart, onRemove, cartItems = []}) {
+function Cart({onCloseCart, onRemove, items = []}) {
+
+   const { cartItems, setCartItems } = React.useContext(AppContext);
+   const [ isOrderComplete, setIsOrderComplete ] = React.useState(false);
+   const onClickOrder = () => {
+      axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/orders', {items: cartItems});
+      setIsOrderComplete(true);
+      setCartItems([]);
+      for (let i = 0; i < cartItems.length; i++) {
+         const item = cartItems[i];
+         axios.delete('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/' + item.id);
+      }
+   }
+
   return (
    <div className="shopCartOverlay">
       <div className="shopCart">
@@ -10,11 +25,11 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
             <img  onClick={onCloseCart} width="32" height="32" className="remove" src="/img/plus.svg" alt="Plus" />
          </h3>
 
-         {cartItems.length > 0 ? (
+         {items.length > 0 ? (
             <>
             <div className="cartItems">
             {
-               cartItems.map((obj, index) => (
+               items.map((obj, index) => (
                   <div key={index} className="cartItem">
                      <img width={120} height={70} src={obj.image} alt={obj.title} />
                      <div className="cartItem-info">
@@ -40,16 +55,15 @@ function Cart({onCloseCart, onRemove, cartItems = []}) {
                <b>1299 uah.</b>
                </div>
             </div>
-            <button>Checkout</button>
+            <button onClick={onClickOrder}>Checkout</button>
          </div>
          </>) : (
             <Notice 
-               title={'test1'} 
-               description={'test2'} 
+               title={isOrderComplete ? 'Order is processed' : 'Cart is empty'} 
+               description={isOrderComplete ? 'Order is processed' : 'Add your favorite sneakers'} 
             />
          )
          }
-
       </div>
    </div>
   )
