@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../App';
 
 function Header(props) {
+
+   const { cartItems } = React.useContext(AppContext);
+   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+
   return (
    <header>
       <Link to="/">
@@ -17,7 +22,7 @@ function Header(props) {
       <div className="headerRight">
       <div className="shopCart" onClick={props.onClickCart}>
          <img width={18} height={18} src="/img/cart.svg" alt="cart"/>
-         <span>1205 uah.</span>
+         <span>{totalPrice} uah.</span>
       </div>
       <div>
          <Link to="/favorites">
