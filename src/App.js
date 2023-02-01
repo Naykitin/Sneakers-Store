@@ -24,7 +24,7 @@ function App() {
       const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
       const cartRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart');
       // const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
-      const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
+      const favoritesRes = window.localStorage.getItem('myFavorites');
 
       setIsLoading(false);
       
@@ -69,6 +69,7 @@ function App() {
         alert('error after adding to favorite');
     }
   }
+
 
   const onSearch = (event) => {
     setSearch(event.target.value);
