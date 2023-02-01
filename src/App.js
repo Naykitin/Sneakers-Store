@@ -23,6 +23,7 @@ function App() {
     async function fetchData () {
       const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
       const cartRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart');
+      // const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
       const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
 
       setIsLoading(false);
