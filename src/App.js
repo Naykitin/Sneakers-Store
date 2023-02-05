@@ -18,23 +18,33 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
-
   React.useEffect(() => {
     async function fetchData () {
       const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
-      const cartRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart');
-      // const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
-      const favoritesRes = window.localStorage.getItem('myFavorites');
-
       setIsLoading(false);
       
       setItems(itemsRes.data);
-      setCartItems(cartRes.data);
-      setFavorites(favoritesRes.data);
-      
+      setCartItems(JSON.parse(window.localStorage.getItem('cartList')));
+      setFavorites(JSON.parse(window.localStorage.getItem('favoritesList')));
     }
     fetchData();
   }, []);
+
+  React.useEffect(() => {
+    setFavorites(JSON.parse(window.localStorage.getItem('favoritesList')));
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('favoritesList', JSON.stringify(favorites))
+  }, [favorites]);
+
+  React.useEffect(() => {
+    setCartItems(JSON.parse(window.localStorage.getItem('cartList')));
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('cartList', JSON.stringify(cartItems))
+  }, [cartItems]);
   
 
   const onRemoveFromCart = (number, id) => {
@@ -43,31 +53,21 @@ function App() {
   }
 
   const onAddToCart = (currItem) => {
-    try {
-      if(cartItems.find(cartCurrItem => cartCurrItem.number === currItem.number)) {
-        axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${currItem.id}`);
-        setCartItems((prev) => prev.filter(item => item.number !== currItem.number));
-      } else {
-        axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart', currItem);
-        setCartItems((prev) => [...prev, currItem]);
-      }
-    } catch (error) {
-      
+    if(cartItems.find(cartCurrItem => cartCurrItem.number === currItem.number)) {
+      setCartItems((prev) => prev.filter(item => item.number !== currItem.number));
+    } else {
+      setCartItems((prev) => [...prev, currItem]);
     }
+    window.localStorage.setItem('cartList', JSON.stringify(cartItems));
  }
 
  const onClickFavorite = async (currItem) => {
-    try {
-      if (favorites.find(favCurrItem => favCurrItem.number === currItem.number)) {
-      axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites/${currItem.id}`);
+    if (favorites.find(favCurrItem => favCurrItem.number === currItem.number)) {
       setFavorites((prev) => prev.filter(item => item.number !== currItem.number));
-      } else {
-        const { data } = await axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites', currItem);
-        setFavorites((prev) => [...prev, data]);
-      } 
-    } catch (error) {
-        alert('error after adding to favorite');
+    } else {
+      setFavorites((prev) => [...prev, currItem]);
     }
+    window.localStorage.setItem('favoritesList', JSON.stringify(favorites));
   }
 
 
