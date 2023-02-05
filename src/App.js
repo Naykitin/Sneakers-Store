@@ -50,7 +50,6 @@ function App() {
   }, []);
 
   const onRemoveFromCart = (number, id) => {
-    axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${id}`);
     setCartItems((prev) => prev.filter(item => item.number !== number));
   }
 
