@@ -5,8 +5,7 @@ import { AppContext } from '../App';
 function Header(props) {
 
    const { cartItems } = React.useContext(AppContext);
-   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
-
+   const totalPrice = cartItems === null ? 0 : cartItems.reduce((sum, obj) => obj.price + sum, 0);
   return (
    <header>
       <Link to="/">

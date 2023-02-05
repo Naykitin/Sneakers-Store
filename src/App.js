@@ -19,33 +19,35 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    async function fetchData () {
-      const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
-      setIsLoading(false);
-      
-      setItems(itemsRes.data);
-      setCartItems(JSON.parse(window.localStorage.getItem('cartList')));
-      setFavorites(JSON.parse(window.localStorage.getItem('favoritesList')));
+    const favoritesListData = window.localStorage.getItem('favoritesList');
+    if (window.localStorage.getItem('favoritesList') !== null) {
+      setFavorites(JSON.parse(favoritesListData));
     }
-    fetchData();
   }, []);
 
   React.useEffect(() => {
-    setFavorites(JSON.parse(window.localStorage.getItem('favoritesList')));
-  }, []);
+    window.localStorage.setItem('favoritesList', JSON.stringify(favorites));
+    }, [favorites]);
 
   React.useEffect(() => {
-    window.localStorage.setItem('favoritesList', JSON.stringify(favorites))
-  }, [favorites]);
-
-  React.useEffect(() => {
-    setCartItems(JSON.parse(window.localStorage.getItem('cartList')));
+    const cartListData = window.localStorage.getItem('cartList');
+    if (window.localStorage.getItem('cartList') !== null) {
+      setCartItems(JSON.parse(cartListData));
+    }
   }, []);
 
   React.useEffect(() => {
     window.localStorage.setItem('cartList', JSON.stringify(cartItems))
   }, [cartItems]);
-  
+
+  React.useEffect(() => {
+    async function fetchData () {
+      const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
+      setIsLoading(false);
+      setItems(itemsRes.data);
+    }
+    fetchData();
+  }, []);
 
   const onRemoveFromCart = (number, id) => {
     axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${id}`);
@@ -70,16 +72,15 @@ function App() {
     window.localStorage.setItem('favoritesList', JSON.stringify(favorites));
   }
 
-
   const onSearch = (event) => {
     setSearch(event.target.value);
   }
 
   const isItemAdded = (number) => {
-    return cartItems.some(item => item.number === number);
+    return cartItems === null ? cartItems : cartItems.some(item => item.number === number);
   }
   const isItemFavorite = (number) => {
-    return favorites.some(item => item.number === number);
+    return favorites === null ? favorites : favorites.some(item => item.number === number);
   }
 
   return (
