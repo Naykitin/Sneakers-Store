@@ -6,7 +6,7 @@ import { AppContext } from '../App'
 function Cart({onCloseCart, onRemove, items = []}) {
 
    const { cartItems, setCartItems } = React.useContext(AppContext);
-   const totalPrice = cartItems.reduce((sum, obj) => obj.price + sum, 0);
+   const totalPrice = cartItems === null ? 0 : cartItems.reduce((sum, obj) => obj.price + sum, 0);
    const [ isOrderComplete, setIsOrderComplete ] = React.useState(false);
    const onClickOrder = () => {
       axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/orders', {items: cartItems});

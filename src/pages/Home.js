@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../components/Card';
+import Slider from '../components/Slider';
 
 
 
@@ -21,6 +22,7 @@ function Home({items, search, setSearch, onSearch, onClickFavorite, onAddToCart,
  
    return (
       <div className="content">
+        <Slider />
         <div className="contentTop">
           <h1>{search ? `Search by: ${search}` : "All sneakers" }</h1>
           <div className="search-block">

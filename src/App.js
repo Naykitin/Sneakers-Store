@@ -18,55 +18,57 @@ function App() {
   const [cartOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  React.useEffect(() => {
+    const favoritesListData = window.localStorage.getItem('favoritesList');
+    if (window.localStorage.getItem('favoritesList') !== null) {
+      setFavorites(JSON.parse(favoritesListData));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('favoritesList', JSON.stringify(favorites));
+    }, [favorites]);
+
+  React.useEffect(() => {
+    const cartListData = window.localStorage.getItem('cartList');
+    if (window.localStorage.getItem('cartList') !== null) {
+      setCartItems(JSON.parse(cartListData));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    window.localStorage.setItem('cartList', JSON.stringify(cartItems))
+  }, [cartItems]);
 
   React.useEffect(() => {
     async function fetchData () {
       const itemsRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/items');
-      const cartRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart');
-      const favoritesRes = await axios.get('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites');
-
       setIsLoading(false);
-      
       setItems(itemsRes.data);
-      setCartItems(cartRes.data);
-      setFavorites(favoritesRes.data);
-      
     }
     fetchData();
   }, []);
-  
 
   const onRemoveFromCart = (number, id) => {
-    axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${id}`);
     setCartItems((prev) => prev.filter(item => item.number !== number));
   }
 
   const onAddToCart = (currItem) => {
-    try {
-      if(cartItems.find(cartCurrItem => cartCurrItem.number === currItem.number)) {
-        axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/cart/${currItem.id}`);
-        setCartItems((prev) => prev.filter(item => item.number !== currItem.number));
-      } else {
-        axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/cart', currItem);
-        setCartItems((prev) => [...prev, currItem]);
-      }
-    } catch (error) {
-      
+    if(cartItems.find(cartCurrItem => cartCurrItem.number === currItem.number)) {
+      setCartItems((prev) => prev.filter(item => item.number !== currItem.number));
+    } else {
+      setCartItems((prev) => [...prev, currItem]);
     }
+    window.localStorage.setItem('cartList', JSON.stringify(cartItems));
  }
 
  const onClickFavorite = async (currItem) => {
-    try {
-      if (favorites.find(favCurrItem => favCurrItem.number === currItem.number)) {
-      axios.delete(`https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites/${currItem.id}`);
+    if (favorites.find(favCurrItem => favCurrItem.number === currItem.number)) {
       setFavorites((prev) => prev.filter(item => item.number !== currItem.number));
-      } else {
-        const { data } = await axios.post('https://631b4c69fae3df4dcffaecdd.mockapi.io/favorites', currItem);
-        setFavorites((prev) => [...prev, data]);
-      } 
-    } catch (error) {
-        alert('error after adding to favorite');
+    } else {
+      setFavorites((prev) => [...prev, currItem]);
     }
+    window.localStorage.setItem('favoritesList', JSON.stringify(favorites));
   }
 
   const onSearch = (event) => {
@@ -74,10 +76,10 @@ function App() {
   }
 
   const isItemAdded = (number) => {
-    return cartItems.some(item => item.number === number);
+    return cartItems === null ? cartItems : cartItems.some(item => item.number === number);
   }
   const isItemFavorite = (number) => {
-    return favorites.some(item => item.number === number);
+    return favorites === null ? favorites : favorites.some(item => item.number === number);
   }
 
   return (
