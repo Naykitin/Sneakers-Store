@@ -1,0 +1,36 @@
+.slick-slider {
+   .slick-dots {
+      display: flex;
+      justify-content: center;
+
+      li {
+         width: 15px;
+         height: 15px;
+         transition: 1.2s all;
+
+         &.slick-active {
+            width: 40px;
+            button {
+               &:before {
+                  width: 40px;
+                  transition: 1.2s all;
+               }
+            }
+         }
+
+         button {
+            width: 15px;
+            height: 15px;
+
+            &:before {
+               content: "";
+               width: 15px;
+               height: 15px;
+               background-color: #000;
+               border-radius: 10px;
+               transition: 1.2s all;
+            }
+         }
+      }
+   }
+}
