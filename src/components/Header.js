@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 
 function Header(props) {
 
@@ -10,7 +12,7 @@ function Header(props) {
    <header>
       <Link to="/">
          <div className="headerLeft">
-            <img width={40} height={40} src="/img/logo.png" alt="logo" />
+            <img width={60} height={60} src="/img/logo.png" alt="logo" />
          <div className="headerInfo">
             <h3>Sneakers-shop</h3>
             <p>Best sneakers store</p>
@@ -20,16 +22,17 @@ function Header(props) {
 
       <div className="headerRight">
       <div className="shopCart" onClick={props.onClickCart}>
-         <img width={18} height={18} src="/img/cart.svg" alt="cart"/>
+         <FontAwesomeIcon icon={faShoppingBasket} />
          <span>{totalPrice} uah.</span>
       </div>
       <div>
          <Link to="/favorites">
-            <img width={18} height={18} src="/img/unliked.png" alt="favorites"/>
+            <img width={24} height={24} src="/img/unliked.png" alt="favorites"/>
          </Link>
       </div>
       <div>
-         <img width={18} height={18} src="/img/user.png" alt="user"/>
+         <FontAwesomeIcon icon={faUser} size="lg"/>
+         {/* <img width={24} height={24} src="/img/user.png" alt="user"/> */}
       </div>
       </div>
    </header>

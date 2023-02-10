@@ -5,6 +5,7 @@ import Cart from './components/Cart';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import axios from 'axios';
+import Footer from './components/Footer';
 
 export const AppContext = React.createContext({});
 
@@ -84,7 +85,6 @@ function App() {
 
   return (
     <AppContext.Provider value={{ items, cartItems, favorites, setFavorites, isItemAdded, isItemFavorite, isFavorite, setIsFavorite, setCartOpened, setCartItems }}>
-      <div className="wrapper">
         {cartOpened && <Cart 
           items={cartItems} 
           onCloseCart = {() => setCartOpened(false)} 
@@ -109,7 +109,7 @@ function App() {
             />
           } />
         </Routes>
-      </div>
+        <Footer />
     </AppContext.Provider>
   );
 }

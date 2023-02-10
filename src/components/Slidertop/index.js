@@ -10,13 +10,14 @@ function Slidertop() {
 
    const settings = {
       dots: true,
+      arrows: false,
       fade: true,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
       speed: 1200,
-      autoplaySpeed: 10000,
+      autoplaySpeed: 5000,
       pauseOnHover: true,
       cssEase: "linear"
     };

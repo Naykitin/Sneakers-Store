@@ -7,7 +7,7 @@ function Favorites({onAddToCart, onClickFavorite}) {
   const state = React.useContext(AppContext);
 
    return (
-      <div className="content">
+      <div className="wrapper favorites">
         <div className="contentTop">
           <h1>Favorites</h1>
         </div>

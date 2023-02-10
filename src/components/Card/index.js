@@ -42,15 +42,15 @@ function Card({id, number, image, title, price, onPlus, onFavorite,loading = fal
             <circle cx="140" cy="181" r="11" />
          </ContentLoader>) : (
          <>
-            <img width={18} height={18} className={styles.favorite} src={isItemFavorite(number) ? "/img/liked.png" : "/img/unliked.png"} alt="unliked" onClick={onClickFavorite}/>
-            <img width={133} height={112} src={image} alt={title}/>
+            <img width={26} height={26} className={styles.favorite} src={isItemFavorite(number) ? "/img/liked.png" : "/img/unliked.png"} alt="unliked" onClick={onClickFavorite}/>
+            <img className={styles.cardImg} width={133} height={112} src={image} alt={title}/>
             <p>{title}</p>
             <div className={styles.cardInfo}>
                <div className={styles.cardPrice}>
                   <span>Price:</span>
                   <b>{price} uah.</b>
                </div>
-               <img width={22} height={22} src={isItemAdded(number) ? "/img/accept.png" : "/img/plus.svg" } alt="Plus" onClick={onClickAdd} />
+               <img width={30} height={30} src={isItemAdded(number) ? "/img/accept.png" : "/img/plus.svg" } alt="Plus" onClick={onClickAdd} />
             </div>
          </>
          )
