@@ -61,7 +61,7 @@ function Cart({onCloseCart, onRemove, items = []}) {
          </>) : (
             <Notice 
                title={isOrderComplete ? 'Order is processed' : 'Cart is empty'} 
-               description={isOrderComplete ? 'Order is processed' : 'Add your favorite sneakers'} 
+               description={isOrderComplete ? 'You receive a notification to your email' : 'Add your favorite sneakers'} 
             />
          )
          }
