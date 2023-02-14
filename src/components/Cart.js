@@ -53,7 +53,7 @@ function Cart({onCloseCart, onRemove, items = []}) {
                <div>
                <p>Tax 5%</p>
                <hr/>
-               <b>{totalPrice * 0.05} uah.</b>
+               <b>{(totalPrice * 0.05).toFixed(2)} uah.</b>
                </div>
             </div>
             <button onClick={onClickOrder}>Checkout</button>
